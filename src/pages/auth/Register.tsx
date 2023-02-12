@@ -1,4 +1,6 @@
+import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
+  let navigate = useNavigate();
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const form = e.target;
@@ -7,7 +9,20 @@ const Register = () => {
     const password = form.password.value;
     const user = { username, email, password };
 
-    fetch();
+    fetch("http://localhost:5000/api/v1/auth/register", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 200) {
+          alert(data.message);
+          navigate("/login");
+        }
+      });
   };
   return (
     <div>
@@ -22,6 +37,13 @@ const Register = () => {
           <br />
           <button type="submit">Login</button>
         </form>
+
+        <p>
+          all ready have an account{" "}
+          <Link to="/login">
+            <span>login</span>
+          </Link>
+        </p>
       </div>
     </div>
   );
