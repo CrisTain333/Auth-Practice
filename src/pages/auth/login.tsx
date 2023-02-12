@@ -6,7 +6,20 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
+    const user = { email, password };
+
+    fetch("http://localhost:5000/api/v1/auth/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message);
+      });
   };
 
   return (
