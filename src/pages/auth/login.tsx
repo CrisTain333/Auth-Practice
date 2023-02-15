@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const form = e.target;
@@ -19,7 +22,10 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        localStorage.setItem("practiceToken", data.token);
+        localStorage.setItem("isLoggedIn", "true");
         alert(data.message);
+        navigate(from, { replace: true });
       });
   };
 
