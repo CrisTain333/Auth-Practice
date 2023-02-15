@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
+  // const [logged, setLogged] = useState("");
   const location = useLocation();
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
