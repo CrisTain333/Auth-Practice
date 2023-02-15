@@ -6,7 +6,11 @@ const Home = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const res = await fetch(`http://`);
+      const res = await fetch(
+        `http://localhost:5000/api/v1/auth/user?token=${token}`
+      );
+      const data = res.json();
+      setUser(data?.user);
     };
 
     getUser();
