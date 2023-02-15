@@ -21,8 +21,8 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        localStorage.setItem("practiceToken", data.token);
+        console.log(data.data.token);
+        localStorage.setItem("practiceToken", data.data.token);
         localStorage.setItem("isLoggedIn", "true");
         alert(data.message);
         navigate(from, { replace: true });
